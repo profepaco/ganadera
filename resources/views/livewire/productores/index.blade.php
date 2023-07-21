@@ -4,7 +4,7 @@
             <h2 class="text-2xl font-semibold md:flex md:justify-center">Productores registrados</h2>
             @if(count($productores)>0)
                 <div class="inline-block overflow-hidden w-full align-middle border-b border-gray-200 shadow sm:rounded-lg">
-                <table class="w-full mt-4">
+                <table class="table-auto w-full mt-4">
                     <thead>
                         <tr>
                             <x-table-th>RFC</x-table-th>

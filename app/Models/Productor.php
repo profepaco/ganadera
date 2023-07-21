@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Productor extends Model
 {
@@ -21,4 +22,12 @@ class Productor extends Model
         'telefono',
         'esSocio'
     ];
+
+    public function ganado():HasMany{
+        return $this->hasMany(Ganado::class);
+    }
+
+    public function propiedades():HasMany{
+        return $this->hasMany(Propiedad::class);
+    }
 }
