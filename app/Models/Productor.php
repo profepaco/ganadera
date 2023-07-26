@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -29,5 +30,9 @@ class Productor extends Model
 
     public function propiedades():HasMany{
         return $this->hasMany(Propiedad::class);
+    }
+
+    public function patente():HasOne{
+        return $this->hasOne(Patente::class);
     }
 }

@@ -3,7 +3,7 @@
         <div class="p-6 text-gray-900">
             <h2 class="text-2xl font-semibold md:flex md:justify-center">Productores registrados</h2>
             @if(count($productores)>0)
-                <div class="inline-block overflow-hidden w-full align-middle border-b border-gray-200 shadow sm:rounded-lg">
+                <div class="inline-block overflow-hidden w-full align-middle border-b border-gray-200 shadow sm:rounded-lg text-sm md:text-base">
                 <table class="table-auto w-full mt-4">
                     <thead>
                         <tr>
@@ -20,7 +20,7 @@
                                 <x-table-td>{{$productor->nombre.' '.$productor->apellidos}}</x-table-td>
                                 <x-table-td>{{$productor->esSocio ? 'Si':'No'}}</x-table-td>
                                 <x-table-td>
-                                    <div class="flex justify-center">
+                                    <div class="flex flex-col md:flex-row justify-center">
                                         <a href="{{route('productores.show',['productore'=>$productor])}}" class="text-gray-500 hover:text-gray-700 mx-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
                                                 stroke="currentColor">

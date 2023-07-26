@@ -30,11 +30,7 @@
             </div>
         </div>
     </div>
-    <div class="mt-4 md:mt-0 bg-white overflow-hidden shadow-sm sm:rounded-lg">
-        <div class="p-6 text-gray-900">
-            <h2 class="text-xl font-semibold md:flex md:justify-center">Patente</h2>
-        </div>
-    </div>
+    <livewire:patentes.index :productor="$productor"/>
     <livewire:ganado.index :productor="$productor"/>
     <livewire:propiedades.index :productor="$productor" />
 </div>

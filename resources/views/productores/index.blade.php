@@ -12,7 +12,7 @@
                     {{session('message')}}
                 </div>
             @endif
-            <x-link-button href="{{route('productores.create')}}">Nuevo productor</x-link-button>
+            <x-link-button class="mx-2" href="{{route('productores.create')}}">Nuevo productor</x-link-button>
             <livewire:productores.index />
         </div>
     </div>
