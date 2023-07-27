@@ -1,16 +1,17 @@
 <?php
 
-use App\Http\Controllers\ProductorController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
-use App\Http\Livewire\Fierros\Create as CreateFierro;
-use App\Http\Livewire\Ganado\Create as CreateGanado;
+use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\ProductorController;
 use App\Http\Livewire\Ganado\Edit as EditGanado;
-use App\Http\Livewire\Patentes\Create as CreatePatente;
 use App\Http\Livewire\Patentes\Edit as EditPatente;
 use App\Http\Livewire\Patentes\Show as ShowPatente;
-use App\Http\Livewire\Propiedades\Create as CreatePropiedad;
+use App\Http\Livewire\Ganado\Create as CreateGanado;
+use App\Http\Livewire\Fierros\Create as CreateFierro;
+use App\Http\Livewire\Patentes\Create as CreatePatente;
 use App\Http\Livewire\Propiedades\Edit as EditPropiedad;
-use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\Propiedades\Create as CreatePropiedad;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +36,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::resource('/productores',ProductorController::class);
+
+    Route::resource('/productos',ProductoController::class)->only('index','show','create','edit');
+    Route::resource('/productores',ProductorController::class)->only('index','show','create','edit');
     //Rutas Ganado
     Route::get('/productor/{productore}/ganado/create',CreateGanado::class)->name('ganado.create');
     Route::get('/productores/{productore}/ganado/edit/{ganado}',EditGanado::class)->name('ganado.edit');
