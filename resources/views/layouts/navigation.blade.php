@@ -18,9 +18,14 @@
                     <x-nav-link :href="route('productores.index')" :active="request()->routeIs('productores.*')">
                         {{ __('Productores') }}
                     </x-nav-link>
+                    @role('Administrador')
                     <x-nav-link :href="route('productos.index')" :active="request()->routeIs('productos.*')">
                         {{ __('Productos') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('usuarios.index')" :active="request()->routeIs('usuarios.*')">
+                        {{ __('Usuarios') }}
+                    </x-nav-link>
+                    @endrole
                 </div>
             </div>
 
@@ -81,6 +86,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('productos.index')" :active="request()->routeIs('productos.*')">
                 {{ __('Productos') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('usuarios.index')" :active="request()->routeIs('usuarios.*')">
+                {{ __('Usuarios') }}
             </x-responsive-nav-link>
         </div>
 

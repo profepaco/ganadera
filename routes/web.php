@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ProductorController;
@@ -36,8 +37,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    
+});
 
+//Rutas para solo administrador
+Route::middleware(['role:Administrador'])->group( function() {
     Route::resource('/productos',ProductoController::class)->only('index','show','create','edit');
+    Route::resource('/usuarios',UserController::class)->only('index','show','create','edit');
+});
+
+//Rutas para administrador y encargada de productores
+Route::middleware(['role:Administrador|Encargada de productores'])->group( function(){
+    //Resource productores
     Route::resource('/productores',ProductorController::class)->only('index','show','create','edit');
     //Rutas Ganado
     Route::get('/productor/{productore}/ganado/create',CreateGanado::class)->name('ganado.create');
@@ -50,7 +61,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/productores/{productore}/patente/{patente}/edit',EditPatente::class)->name('patente.edit');
     Route::get('/productores/{productore}/patente/{patente}',ShowPatente::class)->name('patente.show');
     Route::get('/productores/{productore}/patente/{patente}/fierro',CreateFierro::class)->name('fierro.create');
-    
+
 });
 
 require __DIR__.'/auth.php';
