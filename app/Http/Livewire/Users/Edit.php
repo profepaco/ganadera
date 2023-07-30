@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Users;
 use App\Models\User;
 use Livewire\Component;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Hash;
 
 class Edit extends Component
 {
@@ -50,7 +51,7 @@ class Edit extends Component
         $user->name = $data['name'];
         $user->email = $data['email'];
         if($data['password']){
-            $user->password = $data['password'];
+            $user->password = Hash::make($data['password']);
         }
         $user->syncRoles($data['role']);
         $user->save();
