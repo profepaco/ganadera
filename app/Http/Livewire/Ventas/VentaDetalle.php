@@ -45,4 +45,8 @@ class VentaDetalle extends Component
         $this->importe = $this->producto_precio * $this->cantidad;
         $this->emit('prueba',$this->producto_id,$this->importe);
     }
+
+    public function eliminarCampo($producto_id){
+        $this->emit('quitarElemento',$producto_id);
+    }
 }

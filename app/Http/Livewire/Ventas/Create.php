@@ -9,11 +9,15 @@ use App\Models\Productor;
 class Create extends Component
 {
 
-    protected $listeners = ['agregarCampos','prueba'];
+    protected $listeners = ['agregarCampos','prueba','quitarElemento'];
 
     public $ventaDetalle = array();
+    public $productorId;
+    public $productor;
     public $importes = array();
-    public $subtotal = 0;
+    public $subTotal = 0;
+    public $descuentoSocio = 0;
+    public $total = 0;
 
     public function render()
     {
@@ -29,15 +33,31 @@ class Create extends Component
     
     }
 
+    public function buscaProductor(){
+        $this->productor = Productor::find($this->productorId);
+        $this->actualizaSubtotal();
+    }
+
     public function prueba($productoId,$importe){
         $this->importes['id_'.$productoId] = $importe;
         $this->actualizaSubtotal();
     }
     
     public function actualizaSubtotal(){
-        $this->subtotal = 0;
+        $this->subTotal = 0;
+        $this->descuentoSocio = 0;
         foreach($this->importes as $k => $v){
-            $this->subtotal += $v;
+            $this->subTotal += $v;
         }
+        if($this->productor && $this->productor->esSocio){
+            $this->descuentoSocio = $this->subTotal * 0.20;
+        }
+        $this->total = $this->subTotal - $this->descuentoSocio;
+    }
+
+    public function quitarElemento($productoId){
+        unset($this->ventaDetalle['id_'.$productoId]);
+        unset($this->importes['id_'.$productoId]);
+        $this->actualizaSubtotal();
     }
 }
