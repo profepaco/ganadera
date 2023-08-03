@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ProductorController;
+use App\Http\Controllers\VentaController;
 use App\Http\Livewire\Ganado\Edit as EditGanado;
 use App\Http\Livewire\Patentes\Edit as EditPatente;
 use App\Http\Livewire\Patentes\Show as ShowPatente;
@@ -37,7 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    
+    Route::resource('/ventas',VentaController::class)->only('index','show','create','edit');
 });
 
 //Rutas para solo administrador

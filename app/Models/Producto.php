@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Producto extends Model
 {
@@ -24,5 +25,9 @@ class Producto extends Model
 
     public function ultimoPrecio(){
         return $this->precios->where('es_ultimo','true')->first();
+    }
+
+    public function ventas():BelongsToMany{
+        return $this->belongsToMany(Venta::class);
     }
 }

@@ -35,4 +35,8 @@ class Productor extends Model
     public function patente():HasOne{
         return $this->hasOne(Patente::class);
     }
+
+    public function ventas():HasMany{
+        return $this->hasMany(Venta::class);
+    }
 }
