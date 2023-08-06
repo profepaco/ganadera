@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('productor_id');
             $table->foreign('productor_id')->references('id')->on('productores');
+            $table->decimal('importe');
             $table->timestamps();
         });
     }

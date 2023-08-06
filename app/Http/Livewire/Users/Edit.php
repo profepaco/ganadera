@@ -17,19 +17,13 @@ class Edit extends Component
     public $password_confirmation;
     public $role;
 
-    /*
-    protected $rules = [
-        'name' => 'required',
-        'email' => 'required|email|unique:users,email,'.$this->user_id,
-        'password' => 'nullable|same:password_confirmation',
-        'role' => 'required'
-    ];*/
-
     public function mount(User $user){
         $this->user_id = $user->id;
         $this->name = $user->name;
         $this->email = $user->email;
-        $this->role = $user->roles[0]->id;
+        if(count($user->roles)>0){
+            $this->role = $user->roles[0]->id;
+        }
     }
 
     public function render()

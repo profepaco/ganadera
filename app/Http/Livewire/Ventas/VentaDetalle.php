@@ -14,6 +14,8 @@ class VentaDetalle extends Component
     public $cantidad;
     public $importe;
 
+
+
     public function mount($producto){
         $producto = Producto::find($producto);
         $this->producto_id = $producto->id;
@@ -43,10 +45,11 @@ class VentaDetalle extends Component
 
     public function actualizarImporte(){
         $this->importe = $this->producto_precio * $this->cantidad;
-        $this->emit('prueba',$this->producto_id,$this->importe);
+        $this->emit('agregaImporte',$this->producto_id,$this->importe,$this->cantidad,$this->producto_precio);
     }
 
     public function eliminarCampo($producto_id){
         $this->emit('quitarElemento',$producto_id);
     }
+
 }

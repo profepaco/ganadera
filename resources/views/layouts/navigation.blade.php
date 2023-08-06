@@ -15,20 +15,25 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('productores.index')" :active="request()->routeIs('productores.*')">
-                        {{ __('Productores') }}
-                    </x-nav-link>
                     @role('Administrador')
-                    <x-nav-link :href="route('productos.index')" :active="request()->routeIs('productos.*')">
-                        {{ __('Productos') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('ventas.index')" :active="request()->routeIs('ventas.*')">
-                        {{ __('Ventas') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('usuarios.index')" :active="request()->routeIs('usuarios.*')">
-                        {{ __('Usuarios') }}
-                    </x-nav-link>
+                        <x-nav-link :href="route('usuarios.index')" :active="request()->routeIs('usuarios.*')">
+                            {{ __('Usuarios') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('productos.index')" :active="request()->routeIs('productos.*')">
+                            {{ __('Productos') }}
+                        </x-nav-link>
                     @endrole
+                    @role('Administrador|Encargada de productores')
+                        <x-nav-link :href="route('productores.index')" :active="request()->routeIs('productores.*')">
+                            {{ __('Productores') }}
+                        </x-nav-link>
+                    @endrole
+                    @role('Administrador|Vendedor')
+                        <x-nav-link :href="route('ventas.index')" :active="request()->routeIs('ventas.*')">
+                            {{ __('Ventas') }}
+                        </x-nav-link>
+                    @endrole
+                    
                 </div>
             </div>
 
@@ -84,18 +89,24 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('productores.index')" :active="request()->routeIs('productores.*')">
-                {{ __('Productores') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('productos.index')" :active="request()->routeIs('productos.*')">
-                {{ __('Productos') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('ventas.index')" :active="request()->routeIs('ventas.*')">
-                {{ __('Ventas') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('usuarios.index')" :active="request()->routeIs('usuarios.*')">
-                {{ __('Usuarios') }}
-            </x-responsive-nav-link>
+            @role('Administrador')
+                <x-responsive-nav-link :href="route('usuarios.index')" :active="request()->routeIs('usuarios.*')">
+                    {{ __('Usuarios') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('productos.index')" :active="request()->routeIs('productos.*')">
+                    {{ __('Productos') }}
+                </x-responsive-nav-link>
+            @endrole
+            @role('Administrador|Encargada de productores')
+                <x-responsive-nav-link :href="route('productores.index')" :active="request()->routeIs('productores.*')">
+                    {{ __('Productores') }}
+                </x-responsive-nav-link>
+            @endrole
+            @role('Administrador|Vendedor')
+                <x-responsive-nav-link :href="route('ventas.index')" :active="request()->routeIs('ventas.*')">
+                    {{ __('Ventas') }}
+                </x-responsive-nav-link>
+            @endrole
         </div>
 
         <!-- Responsive Settings Options -->

@@ -18,7 +18,13 @@
                             <tr>
                                 <x-table-td>{{$user->name}}</x-table-td>
                                 <x-table-td>{{$user->email}}</x-table-td>
-                                <x-table-td>{{$user->roles[0]->name}}</x-table-td>
+                                <x-table-td>
+                                    @if(count($user->roles)>0)
+                                        {{$user->roles[0]->name}}
+                                    @else
+                                        Sin rol asignado
+                                    @endif
+                                </x-table-td>
                                 <x-table-td>
                                     <div class="flex flex-col md:flex-row justify-center">
                                         <a href="{{route('usuarios.show',['usuario'=>$user])}}" class="text-gray-500 hover:text-gray-700 mx-2">

@@ -5,11 +5,12 @@ namespace App\Http\Livewire\Ventas;
 use Livewire\Component;
 use App\Models\Producto;
 use App\Models\Productor;
+use App\Models\Venta;
 
 class Create extends Component
 {
 
-    protected $listeners = ['agregarCampos','prueba','quitarElemento'];
+    protected $listeners = ['agregarCampos','agregaImporte','quitarElemento'];
 
     public $ventaDetalle = array();
     public $productorId;
@@ -18,6 +19,10 @@ class Create extends Component
     public $subTotal = 0;
     public $descuentoSocio = 0;
     public $total = 0;
+
+    protected $rules = [
+        'productorId'=>'required',
+    ];
 
     public function render()
     {
@@ -28,8 +33,7 @@ class Create extends Component
 
     public function agregarCampos($nombreProducto){
         $producto = Producto::where('nombre',$nombreProducto)->first();
-
-        $this->ventaDetalle['id_'.$producto->id] = $producto->id;
+        $this->ventaDetalle[$producto->id] = $producto->id;
     
     }
 
@@ -38,8 +42,8 @@ class Create extends Component
         $this->actualizaSubtotal();
     }
 
-    public function prueba($productoId,$importe){
-        $this->importes['id_'.$productoId] = $importe;
+    public function agregaImporte($productoId,$importe, $cantidad, $precio){
+        $this->importes[$productoId] = ['importe'=>$importe,'cantidad'=>$cantidad,'precio'=>$precio];
         $this->actualizaSubtotal();
     }
     
@@ -47,7 +51,7 @@ class Create extends Component
         $this->subTotal = 0;
         $this->descuentoSocio = 0;
         foreach($this->importes as $k => $v){
-            $this->subTotal += $v;
+            $this->subTotal += $v['importe'];
         }
         if($this->productor && $this->productor->esSocio){
             $this->descuentoSocio = $this->subTotal * 0.20;
@@ -56,8 +60,26 @@ class Create extends Component
     }
 
     public function quitarElemento($productoId){
-        unset($this->ventaDetalle['id_'.$productoId]);
-        unset($this->importes['id_'.$productoId]);
+        unset($this->ventaDetalle[$productoId]);
+        unset($this->importes[$productoId]);
         $this->actualizaSubtotal();
+    }
+
+    public function store(){
+        $this->validate();
+
+        $venta = new Venta;
+        $venta->user_id = auth()->user()->id;
+        $venta->productor_id = $this->productorId;
+        $venta->importe = $this->subTotal;
+
+        $venta->save();
+
+        foreach($this->importes as $producto_id => $v){
+            $venta->productos()->attach(['producto_id'=>$producto_id],['cantidad'=>$v['cantidad'],'precio'=>$v['precio']]);
+        }
+        
+        session()->flash('message','La venta se realizó correctamente');
+        return redirect()->route('ventas.index');
     }
 }

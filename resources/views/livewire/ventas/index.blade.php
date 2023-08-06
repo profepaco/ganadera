@@ -7,20 +7,20 @@
                 <table class="table-auto w-full mt-4">
                     <thead>
                         <tr>
-                            <x-table-th>Clave</x-table-th>
-                            <x-table-th>Nombre</x-table-th>
-                            <x-table-th>Precio</x-table-th>
-                            <x-table-th>Categoria</x-table-th>
+                            <x-table-th>Id</x-table-th>
+                            <x-table-th>Cliente</x-table-th>
+                            <x-table-th>Fecha</x-table-th>
+                            <x-table-th>Importe</x-table-th>
                             <x-table-th>Acciones</x-table-th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($ventas as $venta)
                             <tr>
-                                <x-table-td>{{$venta->clave}}</x-table-td>
-                                <x-table-td>{{$venta->nombre}}</x-table-td>
-                                <x-table-td>{{$venta->ultimoPrecio()->valor}}</x-table-td>
-                                <x-table-td>{{$venta->categoria->nombre}}</x-table-td>
+                                <x-table-td>{{$venta->id}}</x-table-td>
+                                <x-table-td>{{$venta->productor->nombre.' '.$venta->productor->apellidos}}</x-table-td>
+                                <x-table-td>{{date('d/m/Y', strtotime($venta->created_at))}}</x-table-td>
+                                <x-table-td>{{'$ '.number_format($venta->productor->esSocio ? $venta->importe -($venta->importe*.2) : $venta->importe,2)}}</x-table-td>
                                 <x-table-td>
                                     <div class="flex flex-col md:flex-row justify-center">
                                         <a href="{{route('ventas.show',['venta'=>$venta])}}" class="text-gray-500 hover:text-gray-700 mx-2">
@@ -30,13 +30,6 @@
                                                     d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                            </svg>
-                                        </a>
-                                        <a href="{{route('ventas.edit',['venta'=>$venta])}}" class="text-indigo-500 hover:text-indigo-700 mx-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
-                                                stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                             </svg>
                                         </a>
                                         <button wire:click="$emit('mostrarAlerta','{{$venta->id}}')">

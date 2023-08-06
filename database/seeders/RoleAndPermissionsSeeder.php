@@ -60,10 +60,21 @@ class RoleAndPermissionsSeeder extends Seeder
         Permission::create(['name' => 'update users']);
         Permission::create(['name' => 'delete users']);
 
+        Permission::create(['name'=>'view ventas']);
+        Permission::create(['name'=>'create ventas']);
+        Permission::create(['name'=>'cancel ventas']);
+
         //Asignando roles
-        $role = Role::create(['name' => 'Administrador']);
-        $role->givePermissionTo(Permission::all());
+        $admin = Role::create(['name' => 'Administrador']);
+        $admin->givePermissionTo(Permission::all());
         
+        //Vendedor
+        $vendedor = Role::create(['name' => 'Vendedor']);
+        $vendedor->givePermissionTo('create ventas');
+        $vendedor->givePermissionTo('view ventas');
+        $vendedor->givePermissionTo('cancel ventas');
+
+        //Encargada de productores
         $role = Role::create(['name' => 'Encargada de productores']);
         $role->givePermissionTo('create productor');
         $role->givePermissionTo('view productor');
@@ -94,5 +105,6 @@ class RoleAndPermissionsSeeder extends Seeder
         $role->givePermissionTo('edit propiedad');
         $role->givePermissionTo('update propiedad');
         $role->givePermissionTo('delete propiedad');
+
     }
 }
