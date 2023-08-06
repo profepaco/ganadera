@@ -4,10 +4,12 @@ namespace App\Http\Livewire\Productores;
 
 use App\Models\Productor;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Index extends Component
 {
 
+    use WithPagination;
     protected $listeners = ['eliminarProductor'];
 
     public function render()
