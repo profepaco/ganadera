@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ProductorController;
+use App\Http\Controllers\ReportesController;
 use App\Http\Controllers\VentaController;
 use App\Http\Livewire\Ganado\Edit as EditGanado;
 use App\Http\Livewire\Patentes\Edit as EditPatente;
@@ -42,6 +43,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['role:Administrador|Vendedor'])->group(function(){
     Route::resource('/ventas',VentaController::class)->only('index','show','create','edit');
+    Route::get('/reportes/venta/{venta}',[ReportesController::class,'imprimirVenta'])->name('ventas.nota');
 });
 
 //Rutas para solo administrador

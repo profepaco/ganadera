@@ -67,6 +67,9 @@
                                 <p class="border w-1/2 border-gray-300 rounded-r-md font-light md:text-lg p-1 md:p-1 text-center">{{number_format($total,2)}}</p>
                             </div>
                         </div>
+                        <div class="mt-4">
+                            <x-link-button href="{{route('ventas.nota',['venta'=>$venta])}}" type="button" class="w-full text-center">Imprimir venta</x-link-button>
+                        </div>
                     </div>
                 </div>
             </div>
