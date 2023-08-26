@@ -15,9 +15,9 @@ class Index extends Component
     {
         $user = auth()->user();
         if($user->hasRole('Administrador')){
-            $ventas = Venta::paginate(10);
+            $ventas = Venta::orderBy('id','desc')->paginate(10);
         }else{
-            $ventas = Venta::where('user_id',$user->id)->paginate(10);
+            $ventas = Venta::where('user_id',$user->id)->orderBy('id','desc')->paginate(10);
         }
         return view('livewire.ventas.index',['ventas'=>$ventas]);
     }

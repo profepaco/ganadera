@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
@@ -31,14 +32,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
+/* Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard'); */
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
 });
 
 Route::middleware(['role:Administrador|Vendedor'])->group(function(){
@@ -68,6 +72,9 @@ Route::middleware(['role:Administrador|Encargada de productores'])->group( funct
     Route::get('/productores/{productore}/patente/{patente}',ShowPatente::class)->name('patente.show');
     Route::get('/productores/{productore}/patente/{patente}/fierro',CreateFierro::class)->name('fierro.create');
 
+    Route::get('/patentes', function(){
+        return view('patentes.index');
+    })->name('patentes.index');
 });
 
 require __DIR__.'/auth.php';

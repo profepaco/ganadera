@@ -9,6 +9,7 @@ class ReportesController extends Controller
 {
     
     public function imprimirVenta(Venta $venta){
+        $descuento = 0.0;
         if($venta->productor->esSocio){
             $descuento = $venta->importe * 0.2;
         }
