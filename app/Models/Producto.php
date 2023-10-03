@@ -13,7 +13,7 @@ class Producto extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['clave','nombre','descripcion','categoria_id'];
+    protected $fillable = ['clave','nombre','descripcion','cantidad','categoria_id'];
 
     public function Categoria():BelongsTo{
         return $this->belongsTo(Categoria::class);
@@ -24,7 +24,7 @@ class Producto extends Model
     }
 
     public function ultimoPrecio(){
-        return $this->precios->where('es_ultimo','true')->first();
+        return $this->precios->where('es_ultimo',1)->first();
     }
 
     public function ventas():BelongsToMany{

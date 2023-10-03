@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Livewire\Productos\Entrada;
+use App\Http\Controllers\VentaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductoController;
-use App\Http\Controllers\ProductorController;
 use App\Http\Controllers\ReportesController;
-use App\Http\Controllers\VentaController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProductorController;
 use App\Http\Livewire\Ganado\Edit as EditGanado;
 use App\Http\Livewire\Patentes\Edit as EditPatente;
 use App\Http\Livewire\Patentes\Show as ShowPatente;
@@ -43,6 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
+   
 });
 
 Route::middleware(['role:Administrador|Vendedor'])->group(function(){
@@ -52,8 +54,10 @@ Route::middleware(['role:Administrador|Vendedor'])->group(function(){
 
 //Rutas para solo administrador
 Route::middleware(['role:Administrador'])->group( function() {
+    Route::get('/productos/entrada',Entrada::class)->name('productos.entrada');
     Route::resource('/productos',ProductoController::class)->only('index','show','create','edit');
     Route::resource('/usuarios',UserController::class)->only('index','show','create','edit');
+    
 });
 
 //Rutas para administrador y encargada de productores

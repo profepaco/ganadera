@@ -38,6 +38,7 @@ class Create extends Component
         $producto->clave = $data['clave'];
         $producto->nombre = $data['nombre'];
         $producto->descripcion = $data['descripcion'];
+        $producto->cantidad = 0;
         $producto->categoria_id = $data['categoria_id'];
         $producto->save();
 

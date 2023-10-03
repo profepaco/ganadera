@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('clave',10);
             $table->string('nombre');
             $table->text('descripcion');
+            $table->integer('cantidad');
             $table->unsignedBigInteger('categoria_id');
             $table->foreign('categoria_id')->references('id')->on('categorias');
             $table->timestamps();

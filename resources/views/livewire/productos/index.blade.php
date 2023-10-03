@@ -10,6 +10,7 @@
                             <x-table-th>Clave</x-table-th>
                             <x-table-th>Nombre</x-table-th>
                             <x-table-th>Precio</x-table-th>
+                            <x-table-th>Cantidad</x-table-th>
                             <x-table-th>Categoria</x-table-th>
                             <x-table-th>Acciones</x-table-th>
                         </tr>
@@ -19,7 +20,8 @@
                             <tr>
                                 <x-table-td>{{$producto->clave}}</x-table-td>
                                 <x-table-td>{{$producto->nombre}}</x-table-td>
-                                <x-table-td>{{$producto->ultimoPrecio()->valor}}</x-table-td>
+                                <x-table-td>{{"$".$producto->ultimoPrecio()->valor}}</x-table-td>
+                                <x-table-td>{{$producto->cantidad}}</x-table-td>
                                 <x-table-td>{{$producto->categoria->nombre}}</x-table-td>
                                 <x-table-td>
                                     <div class="flex flex-col md:flex-row justify-center">
