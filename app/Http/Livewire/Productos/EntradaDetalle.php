@@ -28,10 +28,18 @@ class EntradaDetalle extends Component
 
     public function aumentarCantidad(){
         $this->cantidad++;
+        $this->emit('actualizaCantidad',$this->producto_id, $this->cantidad);
     }
     public function disminuirCantidad(){
         if($this->cantidad>1){
             $this->cantidad--;
         }
+        $this->emit('actualizaCantidad',$this->producto_id, $this->cantidad);
+    }
+
+    
+
+    public function eliminarCampo($producto_id){
+        $this->emit('quitarElemento',$producto_id);
     }
 }

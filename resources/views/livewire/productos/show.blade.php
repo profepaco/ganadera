@@ -20,6 +20,10 @@
                     <p class="border w-1/2 border-gray-300 rounded-r-md font-light text-sm md:text-lg p-2 text-start">{{$producto->categoria->nombre}}</p>
                 </div>
                 <div class="mt-2 flex justify-between w-full md:w-1/2">
+                    <p class="bg-gray-300 py-2 px-2 rounded-l-md w-1/2 text-end font-semibold text-sm md:text-lg">Cantidad existente</p>
+                    <p class="border w-1/2 border-gray-300 rounded-r-md font-light text-sm md:text-lg p-2 text-start">{{$producto->cantidad}}</p>
+                </div>
+                <div class="mt-2 flex justify-between w-full md:w-1/2">
                     <p class="bg-gray-300 py-2 px-2 rounded-l-md w-1/2 text-end font-semibold text-sm md:text-lg">Precio</p>
                     <p class="border w-1/2 border-gray-300 rounded-r-md font-light text-sm md:text-lg p-2 text-start">{{$producto->ultimoPrecio()->valor}}</p>
                 </div>
