@@ -3,6 +3,24 @@
         <div class="p-6 text-gray-900">
             <h2 class="text-2xl font-semibold md:flex md:justify-center">Productores registrados</h2>
             @if(count($productores)>0)
+                <div class="flex justify-center">
+                    <div class="mt-4 md:w-1/2 px-3 text-center flex">
+                        <x-text-input 
+                            id="RFC" 
+                            class="block mt-1 w-full" 
+                            type="text"
+                            placeholder="Escribe el RFC"
+                            wire:model="rfc" 
+                            :value="old('RFC')"
+                            autofocus/>
+                        <x-input-error :messages="$errors->get('RFC')" class="mt-2" />
+                        <label class="px-1 py-2 mx-[-3rem]"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#A5B4FC" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+                            <path d="M21 21l-6 -6" />
+                        </svg></label>
+                    </div>
+                </div>
                 <div class="inline-block overflow-hidden w-full align-middle border-b border-gray-200 shadow sm:rounded-lg text-sm md:text-base">
                 <table class="table-auto w-full mt-4">
                     <thead>

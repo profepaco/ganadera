@@ -10,10 +10,12 @@ class Index extends Component
 
     protected $listeners = ['eliminarProducto'];
 
+    public $nombre='';
+
     public function render()
     {
-        $productos = Producto::paginate(10);
-        return view('livewire.productos.index',['productos'=>$productos]);
+        $productos = Producto::where('nombre','LIKE','%'.$this->nombre.'%')->paginate(10);
+        return view('livewire.productos.index',compact('productos'));
     }
 
     public function eliminarProducto(Producto $producto){

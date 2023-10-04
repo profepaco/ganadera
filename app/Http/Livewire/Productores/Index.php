@@ -11,11 +11,13 @@ class Index extends Component
 
     use WithPagination;
     protected $listeners = ['eliminarProductor'];
+    public $rfc="";
+    public $busqueda;
 
     public function render()
     {
-        $productores = Productor::paginate(10);
-        return view('livewire.productores.index',['productores'=>$productores]);
+        $productores = Productor::where('RFC','LIKE','%'.$this->rfc.'%')->paginate(10);
+        return view('livewire.productores.index',compact('productores'));
     }
 
     public function eliminarProductor(Productor $productor){
