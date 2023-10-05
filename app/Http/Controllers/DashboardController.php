@@ -10,6 +10,12 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
     public function index(){
+        if(auth()->user()->hasRole('Vendedor')){
+            return redirect()->route('ventas.index');
+        }
+        if(auth()->user()->hasRole('Encargada de productores')){
+            return redirect()->route('productores.index');
+        }
         $no_productores = count(Productor::all());
         $ultimosProductores = Productor::orderBy('id','desc')->take(3)->get();
         $no_patentes = count(Patente::all());
@@ -17,7 +23,6 @@ class DashboardController extends Controller
         $no_ventas_mes = Count(Venta::all());
         $ultimasVentas = Venta::orderBy('id','desc')->take(3)->get();
         return view('dashboard',
-            ['no_productores'=>$no_productores,'ultimosProductores'=>$ultimosProductores,'no_patentes'=>$no_patentes,'ultimasPatentes'=>$ultimasPatentes,'no_ventas_mes'=>$no_ventas_mes,'ultimasVentas'=>$ultimasVentas],
-        );
+                ['no_productores'=>$no_productores,'ultimosProductores'=>$ultimosProductores,'no_patentes'=>$no_patentes,'ultimasPatentes'=>$ultimasPatentes,'no_ventas_mes'=>$no_ventas_mes,'ultimasVentas'=>$ultimasVentas],);
     }
 }

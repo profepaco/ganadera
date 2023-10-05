@@ -11,9 +11,9 @@ class VentaDetalle extends Component
     public $producto_clave;
     public $producto_nombre;
     public $producto_precio;
+    public $producto_cantidad;
     public $cantidad;
     public $importe;
-
 
 
     public function mount($producto){
@@ -22,6 +22,7 @@ class VentaDetalle extends Component
         $this->producto_clave = $producto->clave;
         $this->producto_nombre = $producto->nombre;
         $this->producto_precio = $producto->ultimoPrecio()->valor;
+        $this->producto_cantidad = $producto->cantidad;
         $this->cantidad = 0;
         $this->actualizarImporte();
     }
@@ -32,8 +33,10 @@ class VentaDetalle extends Component
     }
 
     public function aumentarCantidad(){
-        $this->cantidad++;
-        $this->actualizarImporte();
+        if($this->cantidad<$this->producto_cantidad){
+            $this->cantidad++;
+            $this->actualizarImporte();
+        }
     }
     public function disminuirCantidad(){
         if($this->cantidad>1){

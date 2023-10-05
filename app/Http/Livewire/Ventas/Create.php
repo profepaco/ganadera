@@ -27,7 +27,7 @@ class Create extends Component
     public function render()
     {
         $productores = Productor::all();
-        $productos = Producto::all()->setVisible(['nombre']);
+        $productos = Producto::where('cantidad', '>', 0)->get()->setVisible(['nombre']);
         return view('livewire.ventas.create',['productores'=>$productores,'productos'=>$productos]);
     }
 
@@ -76,6 +76,9 @@ class Create extends Component
         $venta->save();
 
         foreach($this->importes as $producto_id => $v){
+            $producto = Producto::find($producto_id);
+            $producto->cantidad = $producto->cantidad - $v['cantidad'];
+            $producto->save();
             $venta->productos()->attach(['producto_id'=>$producto_id],['cantidad'=>$v['cantidad'],'precio'=>$v['precio']]);
         }
         
